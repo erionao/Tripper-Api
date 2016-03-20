@@ -1,0 +1,6 @@
+# IDE specific files & folders
+.idea
+*.iml
+
+# Java
+target
