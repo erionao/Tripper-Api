@@ -1,18 +1,19 @@
 package com.devfreaks.tripper.entities;
 
-import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.UUID;
 
-@Entity(name = "air_company")
+@Entity(name = "air_airline")
 public class Airline {
 
     @Id
+    @NotEmpty
     private String id;
 
+    @NotEmpty
     @Column(name = "name", nullable = false)
     private String name;
 
