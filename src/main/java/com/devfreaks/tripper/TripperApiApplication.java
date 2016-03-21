@@ -2,6 +2,7 @@ package com.devfreaks.tripper;
 
 import com.devfreaks.tripper.entities.User;
 import com.devfreaks.tripper.repositories.UserRepository;
+import com.devfreaks.tripper.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
 @SpringBootApplication
@@ -26,7 +28,7 @@ public class TripperApiApplication {
     }
 
     @Bean
-    CommandLineRunner init(final UserRepository userRepository) {
+    CommandLineRunner init(final UserService userService) {
 
         return new CommandLineRunner() {
 
@@ -38,7 +40,7 @@ public class TripperApiApplication {
                 user.setLogin("john@doe.com");
                 user.setPassword("johny");
 
-                userRepository.save(user);
+                userService.save(user);
             }
 
         };
@@ -59,10 +61,9 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
     @Bean
     UserDetailsService userDetailsService() {
-        return login -> {
+        return (login) -> {
             User user = repository.findByLogin(login);
             if(user != null) {
-                System.out.println("Found user");
                 return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), true, true, true, true,
                         AuthorityUtils.createAuthorityList("USER"));
             } else {
@@ -77,13 +78,26 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    BCryptPasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    UserDetailsService myDetailsService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest()
-                .fullyAuthenticated().and().
-                httpBasic().and().
-                csrf().disable();
+                .fullyAuthenticated().and()
+                .httpBasic().and()
+                .csrf().disable();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // userDetailsService should be changed to your user details service
+        // password encoder being the bean defined in grails-app/conf/spring/resources.groovy
+        auth.userDetailsService(myDetailsService)
+                .passwordEncoder(bcryptEncoder);
     }
 
 }

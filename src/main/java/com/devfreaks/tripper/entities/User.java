@@ -2,6 +2,8 @@ package com.devfreaks.tripper.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +20,16 @@ public class User {
     @Type(type = "pg-uuid")
     private UUID id;
 
+    @NotEmpty
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
+    @Email
+    @NotEmpty
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
+    @NotEmpty
     @Column(name = "password", nullable = false)
     private String password;
 
