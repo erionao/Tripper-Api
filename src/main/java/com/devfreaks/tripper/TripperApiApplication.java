@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -34,7 +33,7 @@ public class TripperApiApplication {
             @Override
             public void run(String... arg0) throws Exception {
                 User user = new User();
-                user.setFullname("John Doe");
+                user.setFullName("John Doe");
                 user.setActive(true);
                 user.setLogin("john@doe.com");
                 user.setPassword("johny");

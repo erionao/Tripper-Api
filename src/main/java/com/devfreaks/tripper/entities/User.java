@@ -2,14 +2,11 @@ package com.devfreaks.tripper.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Collection;
 import java.util.UUID;
 
 @Entity(name = "usr_user")
@@ -22,7 +19,7 @@ public class User {
     private UUID id;
 
     @Column(name = "full_name", nullable = false)
-    private String fullname;
+    private String fullName;
 
     @Column(name = "login", nullable = false, unique = true)
     private String login;
@@ -41,12 +38,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getLogin() {
