@@ -1,7 +1,6 @@
 package com.devfreaks.tripper.services;
 
 import com.devfreaks.tripper.entities.Country;
-import org.springframework.stereotype.Service;
 
 public interface CountryService {
 

@@ -1,7 +1,6 @@
 package com.devfreaks.tripper.entities;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity(name = "air_airplane")
 public class Airplane {
