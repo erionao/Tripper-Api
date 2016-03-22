@@ -9,25 +9,26 @@ import javax.persistence.ManyToOne;
 public class Airport {
 
     @Id
-    private String code;
+    private String id;
 
     @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
 
-    public String getCode() {
-        return code;
+    public String getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public City getCity() {
-        return city;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCountry(Country country) {
+        this.country = country;
     }
+
 }
