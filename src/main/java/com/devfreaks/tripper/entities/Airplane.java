@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Airplane {
 
     @Id
-    private UUID id;
+    private String id;
 
     @Column(nullable = false)
     private String name;
@@ -16,11 +16,11 @@ public class Airplane {
     @JoinColumn(name = "airline_id", nullable = false)
     private Airline airline;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
