@@ -8,17 +8,17 @@ import javax.persistence.Id;
 public class Country {
 
     @Id
-    private String code;
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    public String getCode() {
-        return code;
+    public String getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
