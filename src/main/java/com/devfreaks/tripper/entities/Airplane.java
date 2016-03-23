@@ -1,5 +1,7 @@
 package com.devfreaks.tripper.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 @Entity(name = "air_airplane")
@@ -8,7 +10,8 @@ public class Airplane {
     @Id
     private String id;
 
-    @Column(nullable = false)
+    @NotEmpty
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToOne

@@ -15,6 +15,7 @@ public class Flight {
     @JoinColumn(name = "from_airport", nullable = false)
     private Airport from;
 
+    @ManyToOne
     @JoinColumn(name = "to_airport", nullable = false)
     private Airport to;
 
