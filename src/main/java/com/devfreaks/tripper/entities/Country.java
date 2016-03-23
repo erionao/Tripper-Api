@@ -1,5 +1,7 @@
 package com.devfreaks.tripper.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,9 +9,11 @@ import javax.persistence.Id;
 @Entity(name = "cnt_country")
 public class Country {
 
+    @NotEmpty
     @Id
     private String id;
 
+    @NotEmpty
     @Column(name = "name", nullable = false)
     private String name;
 
