@@ -17,6 +17,7 @@ public class UsersController {
     @Autowired
     private UserService service;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<User> findAll() {
         return service.findAll();

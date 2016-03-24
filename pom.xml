@@ -6,7 +6,7 @@
     <groupId>com.devfreaks</groupId>
     <artifactId>tripper-api</artifactId>
     <version>0.0.1</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>tripper-api</name>
     <description>Trip reservation for flights</description>
