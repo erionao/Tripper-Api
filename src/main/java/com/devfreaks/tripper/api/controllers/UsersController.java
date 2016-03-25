@@ -4,10 +4,14 @@ import com.devfreaks.tripper.entities.User;
 import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.services.UserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
+import java.util.Date;
 import java.util.UUID;
 
 @RequestMapping(value = "api/users")
@@ -17,7 +21,6 @@ public class UsersController {
     @Autowired
     private UserService service;
 
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<User> findAll() {
         return service.findAll();

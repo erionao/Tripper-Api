@@ -6,7 +6,6 @@ import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.AirportRepository;
 import com.devfreaks.tripper.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 @Service

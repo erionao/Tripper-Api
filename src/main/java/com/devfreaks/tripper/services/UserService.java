@@ -12,6 +12,8 @@ public interface UserService {
 
     User findOne(UUID id) throws TripperNotFoundException;
 
+    User findByLogin(String login) throws TripperNotFoundException;
+
     User save(User user) throws TripperException;
 
     User update(User user);

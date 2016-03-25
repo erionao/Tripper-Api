@@ -6,7 +6,6 @@ import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.UserRepository;
 import com.devfreaks.tripper.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -34,12 +33,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByLogin(String login) throws TripperNotFoundException {
+        User user = repository.findByLogin(login);
+
+        if (user == null) {
+            throw new TripperNotFoundException("User with login '" + login + "' was not found.");
+        }
+
+        return user;
+    }
+
+    @Override
     public User save(User user) throws TripperException {
         if (repository.findByLogin(user.getLogin()) != null) {
             throw new TripperException("User with login '" + user.getLogin() + "' already exists");
         }
 
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         user.setActive(true);
 
         return repository.save(user);
@@ -49,10 +59,6 @@ public class UserServiceImpl implements UserService {
     public User update(User user) {
         if (!user.getLogin().equals(repository.findOne(user.getId()).getLogin()) && repository.findByLogin(user.getLogin()) != null) {
             throw new TripperException("A user with the same login already exists.");
-        }
-
-        if (!user.getPassword().equals("")) {
-            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         }
 
         return repository.save(user);
