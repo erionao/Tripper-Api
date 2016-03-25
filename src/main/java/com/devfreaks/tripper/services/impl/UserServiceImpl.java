@@ -6,6 +6,7 @@ import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.UserRepository;
 import com.devfreaks.tripper.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
             throw new TripperException("User with login '" + user.getLogin() + "' already exists");
         }
 
-        user.setPassword(user.getPassword());
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setActive(true);
 
         return repository.save(user);
