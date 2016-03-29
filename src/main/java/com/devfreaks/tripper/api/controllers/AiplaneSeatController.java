@@ -1,15 +1,12 @@
 package com.devfreaks.tripper.api.controllers;
 
-
 import com.devfreaks.tripper.entities.AirplaneSeat;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.services.AirplaneSeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.UUID;
-
 
 @RequestMapping(value = "api/airplanes/seats")
 @RestController
