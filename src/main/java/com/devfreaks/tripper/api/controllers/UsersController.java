@@ -9,6 +9,7 @@ import com.devfreaks.tripper.services.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,8 +45,11 @@ public class UsersController {
 
         user.setFullName(model.getFullName());
         user.setLogin(model.getLogin());
-        user.setPassword(model.getPassword());
         user.setActive(model.getActive());
+
+        if (model.getPassword() != null && !model.getPassword().trim().equals("")) {
+            user.setPassword(new BCryptPasswordEncoder().encode(model.getPassword()));
+        }
 
         return service.update(user);
     }
