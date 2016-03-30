@@ -8,6 +8,8 @@ import com.devfreaks.tripper.services.AirlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class AirlineServiceImpl implements AirlineService {
 
@@ -20,7 +22,7 @@ public class AirlineServiceImpl implements AirlineService {
     }
 
     @Override
-    public Airline findOne(String id) throws TripperNotFoundException {
+    public Airline findOne(UUID id) throws TripperNotFoundException {
         Airline airline = repository.findOne(id);
 
         if (airline == null) {
@@ -32,10 +34,6 @@ public class AirlineServiceImpl implements AirlineService {
 
     @Override
     public Airline save(Airline airline) throws TripperException {
-        if (repository.findOne(airline.getId()) != null) {
-            throw new TripperException("Airline with code '" + airline.getId() + "' already exists");
-        }
-
         return repository.save(airline);
     }
 
