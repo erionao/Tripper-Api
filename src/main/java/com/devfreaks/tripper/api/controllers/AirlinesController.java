@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RequestMapping(value = "api/airlines")
 @RestController
 public class AirlinesController {
@@ -20,7 +22,7 @@ public class AirlinesController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Airline index(@PathVariable String id) throws TripperNotFoundException {
+    public Airline index(@PathVariable UUID id) throws TripperNotFoundException {
         return service.findOne(id);
     }
 
@@ -30,16 +32,16 @@ public class AirlinesController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Airline update(@RequestBody @Validated Airline model, @PathVariable String id) throws TripperNotFoundException {
+    public Airline update(@RequestBody @Validated Airline model, @PathVariable UUID id) throws TripperNotFoundException {
         Airline airline = service.findOne(id);
-        airline.setId(model.getId());
+
         airline.setName(model.getName());
 
         return service.save(airline);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void delete(@PathVariable String id) throws TripperNotFoundException {
+    public void delete(@PathVariable UUID id) throws TripperNotFoundException {
         service.delete(service.findOne(id));
     }
 
