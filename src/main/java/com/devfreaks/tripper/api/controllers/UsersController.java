@@ -1,6 +1,8 @@
 package com.devfreaks.tripper.api.controllers;
 
 import com.devfreaks.tripper.entities.User;
+import com.devfreaks.tripper.entities.groups.Save;
+import com.devfreaks.tripper.entities.groups.Update;
 import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.services.UserService;
@@ -32,17 +34,18 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public User save(@RequestBody @Validated User user) {
+    public User save(@RequestBody @Validated(Save.class) User user) {
         return service.save(user);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public User update(@RequestBody @Validated User model, @PathVariable UUID id) throws TripperException {
+    public User update(@RequestBody @Validated(Update.class) User model, @PathVariable UUID id) throws TripperException {
         User user = service.findOne(id);
 
         user.setFullName(model.getFullName());
         user.setLogin(model.getLogin());
         user.setPassword(model.getPassword());
+        user.setActive(model.getActive());
 
         return service.update(user);
     }

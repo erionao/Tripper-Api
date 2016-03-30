@@ -1,27 +1,24 @@
 package com.devfreaks.tripper.api.filters;
 
-import java.io.IOException;
+import com.devfreaks.tripper.exceptions.TripperUnauthorizedException;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureException;
+import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
-import com.devfreaks.tripper.exceptions.TripperException;
-import com.devfreaks.tripper.exceptions.TripperUnauthorizedException;
-import org.springframework.web.filter.GenericFilterBean;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
+import java.io.IOException;
 
 public class JwtFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(final ServletRequest req,
                          final ServletResponse res,
-                         final FilterChain chain) throws IOException, TripperException, ServletException {
+                         final FilterChain chain) throws IOException, TripperUnauthorizedException, ServletException {
 
         final HttpServletRequest request = (HttpServletRequest) req;
         final String authHeader = request.getHeader("Authorization");
@@ -37,7 +34,7 @@ public class JwtFilter extends GenericFilterBean {
             request.setAttribute("claims", claims);
         }
         catch (final SignatureException e) {
-            throw new TripperException("Invalid token.");
+            throw new TripperUnauthorizedException("Invalid token.");
         }
 
         chain.doFilter(req, res);
