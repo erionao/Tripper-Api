@@ -18,6 +18,9 @@ public class Airplane {
     @JoinColumn(name = "airline_id", nullable = false)
     private Airline airline;
 
+    @Column(nullable = false)
+    private Integer seats;
+
     public String getId() {
         return id;
     }
@@ -40,5 +43,13 @@ public class Airplane {
 
     public void setAirline(Airline airline) {
         this.airline = airline;
+    }
+
+    public Integer getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Integer seats) {
+        this.seats = seats;
     }
 }
