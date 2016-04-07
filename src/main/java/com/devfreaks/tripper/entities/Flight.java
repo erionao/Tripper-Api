@@ -1,15 +1,24 @@
 package com.devfreaks.tripper.entities;
 
 import com.devfreaks.tripper.entities.enums.FlightStatus;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity(name = "fli_flight")
 public class Flight {
 
     @Id
-    private String id;
+    @GeneratedValue(generator="uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Type(type = "pg-uuid")
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
+    private String code;
 
     @ManyToOne
     @JoinColumn(name = "from_airport", nullable = false)
@@ -39,12 +48,24 @@ public class Flight {
     @Column(nullable = false)
     private String gate;
 
-    public String getId() {
+    @ManyToOne
+    @JoinColumn(name = "airplane_id", nullable = false)
+    private Airplane airplane;
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Airport getFrom() {
@@ -109,5 +130,13 @@ public class Flight {
 
     public void setGate(String gate) {
         this.gate = gate;
+    }
+
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
     }
 }

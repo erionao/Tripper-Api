@@ -1,31 +1,45 @@
 package com.devfreaks.tripper.entities;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Entity(name = "air_airport")
 public class Airport {
 
-    @NotEmpty
     @Id
-    private String id;
+    @GeneratedValue(generator="uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Type(type = "pg-uuid")
+    private UUID id;
 
-    @Column
+    @Column(nullable = false, unique = true)
+    private String code;
+
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

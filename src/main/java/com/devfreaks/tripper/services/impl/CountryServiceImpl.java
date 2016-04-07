@@ -8,6 +8,8 @@ import com.devfreaks.tripper.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class CountryServiceImpl implements CountryService {
 
@@ -20,7 +22,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public Country findOne(String id) {
+    public Country findOne(UUID id) {
         Country country = repository.findOne(id);
 
         if (country == null) {

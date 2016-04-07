@@ -8,6 +8,8 @@ import com.devfreaks.tripper.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class AirportServiceImpl implements AirportService {
 
@@ -21,7 +23,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public Airport findOne(String id) {
+    public Airport findOne(UUID id) {
         Airport airport = repository.findOne(id);
 
         if (airport == null) {

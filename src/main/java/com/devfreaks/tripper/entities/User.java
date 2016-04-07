@@ -1,5 +1,6 @@
 package com.devfreaks.tripper.entities;
 
+import com.devfreaks.tripper.entities.enums.UserRole;
 import com.devfreaks.tripper.entities.groups.Save;
 import com.devfreaks.tripper.entities.groups.Update;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,9 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.UUID;
-
-import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
-import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 
 @Entity(name = "usr_user")
 public class User {
@@ -33,16 +31,19 @@ public class User {
 
     @Email(groups = {Save.class, Update.class})
     @NotEmpty(groups = {Save.class, Update.class})
-    @Column(name = "login", nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String login;
 
     @NotEmpty(groups = {Save.class})
     @JsonIgnore
-    @Column(name = "password", nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "active", nullable = false)
+    @Column(nullable = false)
     private Boolean active;
+
+    @Column(nullable = false)
+    private UserRole role;
 
     public UUID getId() {
         return id;

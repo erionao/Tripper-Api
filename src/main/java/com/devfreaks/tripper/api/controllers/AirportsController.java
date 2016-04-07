@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RequestMapping(value = "api/airports")
 @RestController
 public class AirportsController {
@@ -19,7 +21,7 @@ public class AirportsController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Airport index(@PathVariable String id) {
+    public Airport index(@PathVariable UUID id) {
         return service.findOne(id);
     }
 
@@ -29,7 +31,7 @@ public class AirportsController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Airport update(@RequestBody @Validated Airport model, @PathVariable String id) {
+    public Airport update(@RequestBody @Validated Airport model, @PathVariable UUID id) {
         Airport airport = service.findOne(id);
 
         airport.setName(model.getName());
@@ -39,7 +41,7 @@ public class AirportsController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable UUID id) {
         service.delete(service.findOne(id));
     }
 

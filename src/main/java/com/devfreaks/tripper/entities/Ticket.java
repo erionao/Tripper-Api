@@ -1,30 +1,52 @@
 package com.devfreaks.tripper.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity(name = "tck_ticket")
 public class Ticket {
 
     @Id
-    private String id;
+    @GeneratedValue(generator="uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Type(type = "pg-uuid")
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
+    private String code;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "birthday", nullable = false)
+    @Column(nullable = false)
     private Date birthday;
 
     @Column(name = "passport_no", nullable = false, unique = true)
     private String passportNo;
 
-    public String getId() {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getFullName() {
@@ -49,5 +71,13 @@ public class Ticket {
 
     public void setPassportNo(String passportNo) {
         this.passportNo = passportNo;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

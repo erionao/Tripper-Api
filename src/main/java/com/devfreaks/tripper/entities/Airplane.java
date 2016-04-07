@@ -1,14 +1,23 @@
 package com.devfreaks.tripper.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity(name = "air_airplane")
 public class Airplane {
 
     @Id
-    private String id;
+    @GeneratedValue(generator="uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Type(type = "pg-uuid")
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
+    private String code;
 
     @NotEmpty
     @Column(nullable = false, unique = true)
@@ -21,12 +30,20 @@ public class Airplane {
     @Column(nullable = false)
     private Integer seats;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

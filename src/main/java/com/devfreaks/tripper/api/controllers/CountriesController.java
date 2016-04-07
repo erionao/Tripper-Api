@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RequestMapping(value = "api/countries")
 @RestController
 public class CountriesController {
@@ -19,7 +21,7 @@ public class CountriesController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Country index(@PathVariable String id) {
+    public Country index(@PathVariable UUID id) {
         return service.findOne(id);
     }
 
@@ -29,7 +31,7 @@ public class CountriesController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Country update(@RequestBody @Validated Country model, @PathVariable String id) {
+    public Country update(@RequestBody @Validated Country model, @PathVariable UUID id) {
         Country country = service.findOne(id);
         country.setName(model.getName());
 
@@ -37,7 +39,7 @@ public class CountriesController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable UUID id) {
         service.delete(service.findOne(id));
     }
 
