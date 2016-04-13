@@ -5,7 +5,10 @@ import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.UserRepository;
 import com.devfreaks.tripper.services.UserService;
+import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +21,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
 
     @Override
-    public Iterable<User> findAll() {
-        return repository.findAll();
+    public Page<User> findAll(Predicate predicate, Pageable pageable) {
+        return repository.findAll(predicate, pageable);
     }
 
     @Override

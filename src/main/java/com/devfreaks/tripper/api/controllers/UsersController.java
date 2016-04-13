@@ -9,7 +9,13 @@ import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.exceptions.TripperValidationException;
 import com.devfreaks.tripper.services.UserService;
 import com.devfreaks.tripper.validators.UserValidator;
+import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -28,8 +34,9 @@ public class UsersController {
     private UserValidator validator;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<User> findAll() {
-        return service.findAll();
+    public Page<User> findAll(@QuerydslPredicate(root = User.class) Predicate predicate, Pageable pageable, @RequestParam("sortOrder") String sortOrder, @RequestParam("sort") String sort) {
+        pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), Sort.Direction.valueOf(sortOrder.toUpperCase()), sort);
+        return service.findAll(predicate, pageable);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
