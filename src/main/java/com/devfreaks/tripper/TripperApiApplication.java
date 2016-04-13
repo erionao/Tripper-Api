@@ -2,6 +2,7 @@ package com.devfreaks.tripper;
 
 import com.devfreaks.tripper.api.filters.JwtFilter;
 import com.devfreaks.tripper.entities.User;
+import com.devfreaks.tripper.entities.enums.UserRole;
 import com.devfreaks.tripper.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,6 +36,7 @@ public class TripperApiApplication extends SpringBootServletInitializer {
                 user.setActive(true);
                 user.setLogin("john@doe.com");
                 user.setPassword("johny");
+                user.setRole(UserRole.ADMINISTRATOR);
 
                 userService.save(user);
             }

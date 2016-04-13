@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity(name = "usr_user")
@@ -25,16 +26,12 @@ public class User {
     @Type(type = "pg-uuid")
     private UUID id;
 
-    @NotEmpty(groups = {Save.class, Update.class})
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Email(groups = {Save.class, Update.class})
-    @NotEmpty(groups = {Save.class, Update.class})
     @Column(nullable = false, unique = true)
     private String login;
 
-    @NotEmpty(groups = {Save.class})
     @JsonIgnore
     @Column(nullable = false)
     private String password;
@@ -85,5 +82,13 @@ public class User {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

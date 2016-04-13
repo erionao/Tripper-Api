@@ -46,10 +46,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) throws TripperException {
-        if (repository.findByLogin(user.getLogin()) != null) {
-            throw new TripperException("User with login '" + user.getLogin() + "' already exists");
-        }
-
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setActive(true);
 

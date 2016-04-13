@@ -1,13 +1,17 @@
 package com.devfreaks.tripper.api.controllers;
 
 import com.devfreaks.tripper.entities.User;
+import com.devfreaks.tripper.entities.enums.UserRole;
 import com.devfreaks.tripper.entities.groups.Save;
 import com.devfreaks.tripper.entities.groups.Update;
 import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
+import com.devfreaks.tripper.exceptions.TripperValidationException;
 import com.devfreaks.tripper.services.UserService;
+import com.devfreaks.tripper.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +24,9 @@ public class UsersController {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private UserValidator validator;
+
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<User> findAll() {
         return service.findAll();
@@ -31,7 +38,14 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public User save(@RequestBody @Validated(Save.class) User user) {
+    public User save(@RequestBody User user, BindingResult result) {
+        user.setRole(UserRole.ADMINISTRATOR);
+        validator.validate(user, result);
+
+        if (result.hasErrors()) {
+            throw new TripperValidationException(result.getAllErrors());
+        }
+
         return service.save(user);
     }
 
