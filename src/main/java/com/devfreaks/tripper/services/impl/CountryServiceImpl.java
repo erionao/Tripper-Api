@@ -5,7 +5,9 @@ import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.CountryRepository;
 import com.devfreaks.tripper.services.CountryService;
+import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,8 +19,8 @@ public class CountryServiceImpl implements CountryService {
     private CountryRepository repository;
 
     @Override
-    public Iterable<Country> findAll() {
-        return repository.findAll();
+    public Iterable<Country> findAll(Predicate predicate, Pageable pageable) {
+        return repository.findAll(predicate, pageable);
     }
 
     @Override
@@ -34,10 +36,6 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country save(Country country) {
-        if (repository.findOne(country.getId()) != null) {
-            throw new TripperException("A country with the same id already exists");
-        }
-
         return repository.save(country);
     }
 
