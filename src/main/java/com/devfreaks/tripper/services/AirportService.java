@@ -1,12 +1,14 @@
 package com.devfreaks.tripper.services;
 
 import com.devfreaks.tripper.entities.Airport;
+import com.mysema.query.types.Predicate;
+import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;
 
 public interface AirportService {
 
-    Iterable<Airport> findAll();
+    Iterable<Airport> findAll(Predicate predicate, Pageable pageable);
 
     Airport findOne(UUID id);
 

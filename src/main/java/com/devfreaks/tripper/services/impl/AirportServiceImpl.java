@@ -5,7 +5,9 @@ import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.AirportRepository;
 import com.devfreaks.tripper.services.AirportService;
+import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,8 +20,8 @@ public class AirportServiceImpl implements AirportService {
 
 
     @Override
-    public Iterable<Airport> findAll() {
-        return repository.findAll();
+    public Iterable<Airport> findAll(Predicate predicate, Pageable pageable) {
+        return repository.findAll(predicate, pageable);
     }
 
     @Override
