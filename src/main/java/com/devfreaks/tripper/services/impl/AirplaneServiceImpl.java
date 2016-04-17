@@ -4,8 +4,12 @@ import com.devfreaks.tripper.entities.Airplane;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.AirplaneRepository;
 import com.devfreaks.tripper.services.AirplaneService;
+import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class AirplaneServiceImpl implements AirplaneService {
@@ -14,12 +18,12 @@ public class AirplaneServiceImpl implements AirplaneService {
     private AirplaneRepository repository;
 
     @Override
-    public Iterable<Airplane> findAll() {
-        return repository.findAll();
+    public Iterable<Airplane> findAll(Predicate predicate, Pageable pageable) {
+        return repository.findAll(predicate, pageable);
     }
 
     @Override
-    public Airplane findOne(String id) {
+    public Airplane findOne(UUID id) {
         Airplane airplane = repository.findOne(id);
 
         if (airplane == null) {
