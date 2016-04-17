@@ -1,18 +1,18 @@
 package com.devfreaks.tripper.services;
 
 import com.devfreaks.tripper.entities.Airline;
-import com.devfreaks.tripper.exceptions.TripperException;
-import com.devfreaks.tripper.exceptions.TripperNotFoundException;
+import com.mysema.query.types.Predicate;
+import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;
 
 public interface AirlineService {
 
-    Iterable<Airline> findAll();
+    Iterable<Airline> findAll(Predicate predicate, Pageable pageable);
 
-    Airline findOne(UUID id) throws TripperNotFoundException;
+    Airline findOne(UUID id);
 
-    Airline save(Airline airline) throws TripperException;
+    Airline save(Airline airline);
 
     Airline update(Airline airline);
 

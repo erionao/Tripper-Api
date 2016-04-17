@@ -5,7 +5,9 @@ import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.AirlineRepository;
 import com.devfreaks.tripper.services.AirlineService;
+import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,23 +19,23 @@ public class AirlineServiceImpl implements AirlineService {
     private AirlineRepository repository;
 
     @Override
-    public Iterable<Airline> findAll() {
-        return repository.findAll();
+    public Iterable<Airline> findAll(Predicate predicate, Pageable pageable) {
+        return repository.findAll(predicate, pageable);
     }
 
     @Override
-    public Airline findOne(UUID id) throws TripperNotFoundException {
+    public Airline findOne(UUID id) {
         Airline airline = repository.findOne(id);
 
         if (airline == null) {
-            throw new TripperNotFoundException("Airline with code '" + id + "' was not found.");
+            throw new TripperNotFoundException("Airline with id '" + id + "' was not found.");
         }
 
         return airline;
     }
 
     @Override
-    public Airline save(Airline airline) throws TripperException {
+    public Airline save(Airline airline) {
         return repository.save(airline);
     }
 
