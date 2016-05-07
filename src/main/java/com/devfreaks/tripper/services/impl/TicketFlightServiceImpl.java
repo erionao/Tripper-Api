@@ -1,14 +1,15 @@
 package com.devfreaks.tripper.services.impl;
 
-
 import com.devfreaks.tripper.entities.TicketFlight;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.TicketFlightRepository;
 import com.devfreaks.tripper.services.TicketFlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class TicketFlightServiceImpl implements TicketFlightService{
 
     @Autowired

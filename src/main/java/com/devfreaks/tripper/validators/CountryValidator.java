@@ -25,13 +25,13 @@ public class CountryValidator implements Validator {
         Country country = (Country) target;
 
         if (StringUtils.isEmpty(country.getCode())) {
-            errors.rejectValue("code", "country.code.required");
+            errors.rejectValue("code", "code.required");
         } else if (repository.findOne(QCountry.country.code.eq(country.getCode())) != null) {
-            errors.rejectValue("code", "country.code.exists");
+            errors.rejectValue("code", "code.exists");
         }
 
         if (StringUtils.isEmpty(country.getName())) {
-            errors.rejectValue("name", "country.name.required");
+            errors.rejectValue("name", "name.required");
         }
     }
 }

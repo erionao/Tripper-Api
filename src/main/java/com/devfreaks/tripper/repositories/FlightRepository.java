@@ -16,7 +16,7 @@ import java.util.UUID;
 public interface FlightRepository extends PagingAndSortingRepository<Flight, UUID>,
         QueryDslPredicateExecutor<Flight>, QuerydslBinderCustomizer<QFlight> {
 
-    default void customize(QuerydslBindings bindings, QCountry flight) {
+    default void customize(QuerydslBindings bindings, QFlight flight) {
         bindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringPath::containsIgnoreCase);
     }
 

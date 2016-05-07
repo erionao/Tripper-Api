@@ -29,23 +29,17 @@ public class AirplaneValidator implements Validator {
         Airplane airplane = (Airplane) target;
 
         if (StringUtils.isEmpty(airplane.getCode())) {
-            errors.rejectValue("code", "airplane.code.required");
+            errors.rejectValue("code", "code.required");
         } else if (repository.findOne(QAirplane.airplane.code.eq(airplane.getCode())) != null) {
-            errors.rejectValue("code", "airplane.code.exists");
-        }
-
-        if (StringUtils.isEmpty(airplane.getName())) {
-            errors.rejectValue("name", "airplane.name.required");
-        }else if (repository.findOne(QAirplane.airplane.name.eq(airplane.getName())) != null) {
-            errors.rejectValue("code", "airplane.name.exists");
+            errors.rejectValue("code", "code.exists");
         }
 
         if(airplane.getSeats() != null){
-            errors.rejectValue("seats", "airplane.seats.required");
+            errors.rejectValue("seats", "seats.required");
         }
 
         if(airlineRepository.findOne(airplane.getAirline().getId()) != null){
-            errors.rejectValue("airline_id", "airplane.airline_id.required");
+            errors.rejectValue("airline.id", "airline.id.required");
         }
 
     }

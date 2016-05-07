@@ -29,25 +29,25 @@ public class TicketValidator implements Validator {
         Ticket ticket = (Ticket) target;
 
         if (StringUtils.isEmpty(ticket.getCode())) {
-            errors.rejectValue("ticket", "ticket.code.required");
+            errors.rejectValue("ticket", "code.required");
         } else if (repository.findOne(QTicket.ticket.code.eq(ticket.getCode())) != null) {
-            errors.rejectValue("code", "ticket.code.exists");
+            errors.rejectValue("code", "code.exists");
         }
 
         if (StringUtils.isEmpty(ticket.getFullName())) {
-            errors.rejectValue("full_name", "ticket.full_name.required");
+            errors.rejectValue("fullName", "fullName.required");
         }
 
         if(ticket.getBirthday() != null){
-            errors.rejectValue("birthday", "ticket.birthday.required");
+            errors.rejectValue("birthday", "birthday.required");
         }
 
         if (StringUtils.isEmpty(ticket.getPassportNo())) {
-            errors.rejectValue("passport_no", "ticket.passport_no.required");
+            errors.rejectValue("passportNo", "passportNo.required");
         }
 
         if(userRepository.findOne(ticket.getUser().getId()) != null){
-            errors.rejectValue("user_id", "airport.user_id.required");
+            errors.rejectValue("user.id", "user.id.required");
         }
 
 

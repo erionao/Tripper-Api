@@ -25,31 +25,31 @@ public class UserValidator implements Validator {
         User user = (User)o;
 
         if (StringUtils.isEmpty(user.getFullName())) {
-            errors.rejectValue("fullName", "required", "user.fullName.required");
+            errors.rejectValue("fullName", "required", "fullName.required");
         }
 
         if (StringUtils.isEmpty(user.getLogin())) {
-            errors.rejectValue("login", "required", "user.login.required");
+            errors.rejectValue("login", "required", "login.required");
         }
 
         if (!EmailValidator.getInstance().isValid(user.getLogin())) {
-            errors.rejectValue("login", "valid.email", "user.login.valid.email");
+            errors.rejectValue("login", "valid.email", "login.valid.email");
         }
 
         if (user.getId() == null && !StringUtils.isEmpty(user.getLogin()) && repository.findByLogin(user.getLogin()) != null) {
-            errors.rejectValue("login", "exists", "user.login.exists");
+            errors.rejectValue("login", "exists", "login.exists");
         }
 
         if (user.getId() != null && !repository.findOne(user.getId()).getLogin().equals(user.getLogin()) && repository.findByLogin(user.getLogin()) != null) {
-            errors.rejectValue("login", "exists", "user.login.exists");
+            errors.rejectValue("login", "exists", "login.exists");
         }
 
         if (StringUtils.isEmpty(user.getPassword())) {
-            errors.rejectValue("password", "required", "user.password.required");
+            errors.rejectValue("password", "required", "password.required");
         }
 
         if (user.getRole() == null) {
-            errors.rejectValue("role", "required", "user.role.required");
+            errors.rejectValue("role", "required", "role.required");
         }
     }
 }

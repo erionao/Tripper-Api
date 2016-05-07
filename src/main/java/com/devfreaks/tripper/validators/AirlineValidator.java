@@ -25,7 +25,7 @@ public class AirlineValidator implements Validator {
         Airline airline = (Airline) target;
 
         if (StringUtils.isEmpty(airline.getName())) {
-            errors.rejectValue("name", "airline.name.required");
+            errors.rejectValue("name", "name.required");
         }
     }
 }

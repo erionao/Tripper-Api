@@ -7,10 +7,12 @@ import com.devfreaks.tripper.entities.QCountry;
 import com.devfreaks.tripper.repositories.AirportRepository;
 import com.devfreaks.tripper.repositories.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@Component
 public class AirportValidator implements Validator {
 
     @Autowired
@@ -29,17 +31,17 @@ public class AirportValidator implements Validator {
         Airport airport = (Airport) target;
 
         if (StringUtils.isEmpty(airport.getCode())) {
-            errors.rejectValue("code", "airport.code.required");
+            errors.rejectValue("code", "code.required");
         } else if (repository.findOne(QAirport.airport.code.eq(airport.getCode())) != null) {
-            errors.rejectValue("code", "airport.code.exists");
+            errors.rejectValue("code", "code.exists");
         }
 
         if (StringUtils.isEmpty(airport.getName())) {
-            errors.rejectValue("name", "airport.name.required");
+            errors.rejectValue("name", "name.required");
         }
 
         if(countryRepository.findOne(airport.getCountry().getId())!= null){
-            errors.rejectValue("country_id", "airport.country_id.required");
+            errors.rejectValue("country.id", "country.id.required");
         }
 
 

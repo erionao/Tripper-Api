@@ -10,10 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.apache.commons.validator.routines.DateValidator;
-import org.apache.commons.validator.routines.DoubleValidator;
-import java.util.Date;
-
 
 @Component
 public class FlightValidator implements Validator {
@@ -32,60 +28,55 @@ public class FlightValidator implements Validator {
         return aClass == Flight.class;
     }
 
-    public void validate(Object o, Errors errors){
-        Flight flight = (Flight)o;
+    public void validate(Object o, Errors errors) {
+        Flight flight = (Flight) o;
 
         if (StringUtils.isEmpty(flight.getCode())) {
-            errors.rejectValue("code", "required", "flight.code.required");
+            errors.rejectValue("code", "required", "code.required");
         }
 
-        if(airportRepo.findOne(flight.getFrom().getId()) != null){
-            errors.rejectValue("from_airport", "required", "flight.from_airport.required");
+        if (airportRepo.findOne(flight.getFrom().getId()) != null) {
+            errors.rejectValue("from.id", "required", "from.id.required");
         }
 
         if (airportRepo.findOne(flight.getTo().getId()) != null) {
-            errors.rejectValue("to_airport", "required", "flight.to_airport.required");
+            errors.rejectValue("to.id", "required", "to.id.required");
         }
 
-        if(flight.getDeparture() != null){
-            errors.rejectValue("departure", "required", "flight.departure.required");
+        if (flight.getDeparture() != null) {
+            errors.rejectValue("departure", "required", "departure.required");
         }
 
-        if(flight.getArrival() != null){
-            errors.rejectValue("arrival", "required", "flight.arrival.required");
+        if (flight.getArrival() != null) {
+            errors.rejectValue("arrival", "required", "arrival.required");
         }
 
-        if (flight.getPrice() != null){
-            errors.rejectValue("price", "required", "flight.price.required");
+        if (flight.getPrice() != null) {
+            errors.rejectValue("price", "required", "price.required");
         }
 
-        if (flight.getBaggageLimit() != null){
-            errors.rejectValue("baggageLimit", "required", "flight.baggageLimit.required");
+        if (flight.getBaggageLimit() != null) {
+            errors.rejectValue("baggageLimit", "required", "baggageLimit.required");
         }
 
-        if ((flight.getStatus() != FlightStatus.CANCELED) ||(flight.getStatus() !=FlightStatus.READY) ||(flight.getStatus() !=  FlightStatus.FULL)){
-            errors.rejectValue("status", "invalid", "flight.status.invalid");
+        if ((flight.getStatus() != FlightStatus.CANCELED) || (flight.getStatus() != FlightStatus.READY) || (flight.getStatus() != FlightStatus.FULL)) {
+            errors.rejectValue("status", "invalid", "status.invalid");
         }
 
-        if (flight.getGate() != null){
-            errors.rejectValue("gate", "required", "flight.gate.required");
+        if (flight.getGate() != null) {
+            errors.rejectValue("gate", "required", "gate.required");
         }
 
 
-        if (flight.getBaggageLimit() != null){
-            errors.rejectValue("baggageLimit", "required", "flight.baggageLimit.required");
+        if (flight.getBaggageLimit() != null) {
+            errors.rejectValue("baggageLimit", "required", "baggageLimit.required");
         }
 
-        if(airplaneRepo.findOne(flight.getAirplane().getId()) != null){
+        if (airplaneRepo.findOne(flight.getAirplane().getId()) != null) {
             errors.rejectValue("airplane", "required", "flight.airplane.required");
         }
 
     }
-
-
-
-
-
 
 
 }

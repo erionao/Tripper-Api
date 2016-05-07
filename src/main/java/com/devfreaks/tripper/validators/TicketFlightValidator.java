@@ -27,15 +27,15 @@ public class TicketFlightValidator implements Validator {
         TicketFlight tckFlight = (TicketFlight) target;
 
         if(flightRepository.findOne(tckFlight.getFlight().getId()) != null){
-            errors.rejectValue("flight_id", "ticketFlight.flight_id.required");
+            errors.rejectValue("flightId", "flight.id.required");
         }
 
         if(ticketRepository.findOne(tckFlight.getTicket().getId()) != null){
-            errors.rejectValue("ticket_id", "ticketFlight.ticket_id.required");
+            errors.rejectValue("ticketId", "ticket.id.required");
         }
 
         if (tckFlight.getOrder() != null){
-            errors.rejectValue("order", "ticketFlight.order.required");
+            errors.rejectValue("order", "order.required");
         }
     }
 

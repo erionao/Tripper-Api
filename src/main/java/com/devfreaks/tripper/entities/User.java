@@ -1,20 +1,15 @@
 package com.devfreaks.tripper.entities;
 
 import com.devfreaks.tripper.entities.enums.UserRole;
-import com.devfreaks.tripper.entities.groups.Save;
-import com.devfreaks.tripper.entities.groups.Update;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity(name = "usr_user")
