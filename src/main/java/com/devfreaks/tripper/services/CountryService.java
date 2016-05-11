@@ -10,6 +10,8 @@ public interface CountryService {
 
     Iterable<Country> findAll(Predicate predicate, Pageable pageable);
 
+    Country findOne(Predicate predicate);
+
     Country findOne(UUID id);
 
     Country save(Country country);

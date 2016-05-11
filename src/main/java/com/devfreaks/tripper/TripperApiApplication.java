@@ -1,8 +1,13 @@
 package com.devfreaks.tripper;
 
 import com.devfreaks.tripper.api.filters.JwtFilter;
+import com.devfreaks.tripper.entities.Airport;
+import com.devfreaks.tripper.entities.Country;
+import com.devfreaks.tripper.entities.QCountry;
 import com.devfreaks.tripper.entities.User;
 import com.devfreaks.tripper.entities.enums.UserRole;
+import com.devfreaks.tripper.services.AirportService;
+import com.devfreaks.tripper.services.CountryService;
 import com.devfreaks.tripper.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +30,7 @@ public class TripperApiApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    CommandLineRunner init(final UserService userService) {
+    CommandLineRunner init(final UserService userService, final CountryService countryService, final AirportService airportService) {
 
         return new CommandLineRunner() {
 
@@ -39,6 +44,20 @@ public class TripperApiApplication extends SpringBootServletInitializer {
                 user.setRole(UserRole.ADMINISTRATOR);
 
                 userService.save(user);
+
+                /**
+                 * Kosovo
+                 */
+                Country country = null;
+
+                if (countryService.findOne(QCountry.country.name.eq("Kosovo")) == null) {
+                    country = countryService.save(new Country("Kosovo"));
+                } else {
+                    country = countryService.findOne(QCountry.country.name.eq("Kosovo"));
+                }
+
+                countryService.save(new Country("Kosovo"));
+                airportService.save(new Airport("PRN", "Pristina International Airport Adem Jashari", country));
             }
 
         };

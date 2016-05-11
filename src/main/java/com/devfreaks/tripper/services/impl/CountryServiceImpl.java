@@ -23,6 +23,11 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    public Country findOne(Predicate predicate) {
+        return repository.findOne(predicate);
+    }
+
+    @Override
     public Country findOne(UUID id) {
         Country country = repository.findOne(id);
 

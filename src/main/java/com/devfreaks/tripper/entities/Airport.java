@@ -25,6 +25,14 @@ public class Airport {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
+    public Airport() {}
+
+    public Airport(String code, String name, Country country) {
+        this.code = code;
+        this.name = name;
+        this.country = country;
+    }
+
     public UUID getId() {
         return id;
     }

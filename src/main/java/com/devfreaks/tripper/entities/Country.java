@@ -20,12 +20,14 @@ public class Country {
     private UUID id;
 
     @NotEmpty
-    @Column(nullable = false, unique = true)
-    private String code;
-
-    @NotEmpty
     @Column(nullable = false)
     private String name;
+
+    public Country() {}
+
+    public Country(String name) {
+        this.name = name;
+    }
 
     public UUID getId() {
         return id;
@@ -33,14 +35,6 @@ public class Country {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {
