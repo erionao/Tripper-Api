@@ -38,7 +38,7 @@ public class AirportValidator implements Validator {
             errors.rejectValue("name", "required", "Name is required");
         }
 
-        if (countryRepository.findOne(airport.getCountry().getId()) != null) {
+        if (airport.getCountry() == null) {
             errors.rejectValue("country.id", "required", "Country required");
         }
 

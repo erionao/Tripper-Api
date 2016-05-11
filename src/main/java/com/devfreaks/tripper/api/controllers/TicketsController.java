@@ -38,7 +38,7 @@ public class TicketsController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Ticket save(@RequestBody @Validated Ticket ticket, BindingResult result) {
+    public Ticket save(@RequestBody Ticket ticket, BindingResult result) {
         validator.validate(ticket, result);
 
         if (result.hasErrors()) {
@@ -49,7 +49,7 @@ public class TicketsController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Ticket update(@RequestBody @Validated Ticket model, @PathVariable UUID id, BindingResult result) {
+    public Ticket update(@RequestBody Ticket model, @PathVariable UUID id, BindingResult result) {
         Ticket ticket = service.findOne(id);
 
         ticket.setCode(model.getCode());

@@ -51,7 +51,7 @@ public class FlightController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Flight update(@RequestBody @Validated Flight model, @PathVariable UUID id, BindingResult result) {
+    public Flight update(@RequestBody Flight model, @PathVariable UUID id, BindingResult result) {
         Flight flight = service.findOne(id);
 
         flight.setArrival(model.getArrival());

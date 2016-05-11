@@ -31,11 +31,11 @@ public class FlightValidator implements Validator {
             errors.rejectValue("code", "required", "Code is required");
         }
 
-        if (airportRepo.findOne(flight.getFrom().getId()) == null) {
+        if (flight.getFrom() == null || airportRepo.findOne(flight.getFrom().getId()) == null) {
             errors.rejectValue("from.id", "required", "From is required");
         }
 
-        if (airportRepo.findOne(flight.getTo().getId()) == null) {
+        if (flight.getTo() == null || airportRepo.findOne(flight.getTo().getId()) == null) {
             errors.rejectValue("to.id", "required", "To is required");
         }
 

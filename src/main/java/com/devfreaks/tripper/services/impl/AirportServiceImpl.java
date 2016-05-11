@@ -37,7 +37,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public Airport save(Airport airport) {
-        if (repository.findOne(airport.getId()) != null) {
+        if (airport.getId() != null && repository.findOne(airport.getId()) != null) {
             throw new TripperException("Airport with id '" + airport.getId() + "' already exists.");
         }
 

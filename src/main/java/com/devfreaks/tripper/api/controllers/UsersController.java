@@ -55,7 +55,7 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public User update(@RequestBody @Validated User model, @PathVariable UUID id) throws TripperException {
+    public User update(@RequestBody User model, @PathVariable UUID id) throws TripperException {
         User user = service.findOne(id);
 
         user.setFullName(model.getFullName());

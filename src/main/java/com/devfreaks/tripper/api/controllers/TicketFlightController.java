@@ -23,7 +23,7 @@ public class TicketFlightController {
     private TicketFlightValidator validator;
 
     @RequestMapping(method = RequestMethod.POST)
-    public TicketFlight save(@RequestBody @Validated TicketFlight ticketFlight, BindingResult result) {
+    public TicketFlight save(@RequestBody TicketFlight ticketFlight, BindingResult result) {
         validator.validate(ticketFlight, result);
 
         if (result.hasErrors()) {

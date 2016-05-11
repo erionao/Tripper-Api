@@ -38,7 +38,7 @@ public class CountriesController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Country save(@RequestBody @Validated Country country, BindingResult result) {
+    public Country save(@RequestBody Country country, BindingResult result) {
         validator.validate(country, result);
 
         if (result.hasErrors()) {
@@ -49,7 +49,7 @@ public class CountriesController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Country update(@RequestBody @Validated Country model, @PathVariable UUID id, BindingResult result) {
+    public Country update(@RequestBody Country model, @PathVariable UUID id, BindingResult result) {
         Country country = service.findOne(id);
         country.setName(model.getName());
 
