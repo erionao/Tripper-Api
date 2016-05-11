@@ -38,7 +38,7 @@ public class AirportsController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Airport save(@RequestBody @Validated Airport airport, BindingResult result) {
+    public Airport save(@RequestBody Airport airport, BindingResult result) {
         validator.validate(airport, result);
 
         if (result.hasErrors()) {
@@ -49,11 +49,12 @@ public class AirportsController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Airport update(@RequestBody @Validated Airport model, @PathVariable UUID id, BindingResult result) {
+    public Airport update(@RequestBody Airport model, @PathVariable UUID id, BindingResult result) {
         Airport airport = service.findOne(id);
 
         airport.setName(model.getName());
         airport.setCountry(model.getCountry());
+
         validator.validate(airport, result);
 
         if (result.hasErrors()) {

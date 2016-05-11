@@ -29,27 +29,27 @@ public class TicketValidator implements Validator {
         Ticket ticket = (Ticket) target;
 
         if (StringUtils.isEmpty(ticket.getCode())) {
-            errors.rejectValue("ticket", "code.required");
-        } else if (repository.findOne(QTicket.ticket.code.eq(ticket.getCode())) != null) {
-            errors.rejectValue("code", "code.exists");
+            errors.rejectValue("code", "required", "Code is required");
+        } else if (ticket.getId() == null && repository.findOne(QTicket.ticket.code.eq(ticket.getCode())) != null) {
+            errors.rejectValue("code", "exists", "Code is taken");
+        } else if (ticket.getId() != null && repository.findOne(ticket.getId()) != null && repository.findOne(QTicket.ticket.code.eq(ticket.getCode())) != null) {
+            errors.rejectValue("code", "exists", "Code is taken");
         }
 
         if (StringUtils.isEmpty(ticket.getFullName())) {
-            errors.rejectValue("fullName", "fullName.required");
+            errors.rejectValue("fullName", "required", "Full name is requried");
         }
 
-        if (ticket.getBirthday() != null) {
-            errors.rejectValue("birthday", "birthday.required");
+        if (ticket.getBirthday() == null) {
+            errors.rejectValue("birthday", "required", "Birthday is required");
         }
 
         if (StringUtils.isEmpty(ticket.getPassportNo())) {
-            errors.rejectValue("passportNo", "passportNo.required");
+            errors.rejectValue("passportNo", "required", "Passport number is required");
         }
 
-        if (userRepository.findOne(ticket.getUser().getId()) != null) {
-            errors.rejectValue("user.id", "user.id.required");
+        if (userRepository.findOne(ticket.getUser().getId()) == null) {
+            errors.rejectValue("user.id", "required", "User is required");
         }
-
-
     }
 }

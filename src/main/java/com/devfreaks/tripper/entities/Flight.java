@@ -40,13 +40,7 @@ public class Flight {
     private Double price;
 
     @Column(nullable = false)
-    private Double baggageLimit;
-
-    @Column(nullable = false)
     private FlightStatus status;
-
-    @Column(nullable = false)
-    private String gate;
 
     public UUID getId() {
         return id;
@@ -104,27 +98,11 @@ public class Flight {
         this.price = price;
     }
 
-    public Double getBaggageLimit() {
-        return baggageLimit;
-    }
-
-    public void setBaggageLimit(Double baggageLimit) {
-        this.baggageLimit = baggageLimit;
-    }
-
     public FlightStatus getStatus() {
         return status;
     }
 
     public void setStatus(FlightStatus status) {
         this.status = status;
-    }
-
-    public String getGate() {
-        return gate;
-    }
-
-    public void setGate(String gate) {
-        this.gate = gate;
     }
 }

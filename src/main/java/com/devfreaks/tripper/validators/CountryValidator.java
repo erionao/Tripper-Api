@@ -25,15 +25,15 @@ public class CountryValidator implements Validator {
         Country country = (Country) target;
 
         if (StringUtils.isEmpty(country.getCode())) {
-            errors.rejectValue("code", "code.required");
+            errors.rejectValue("code", "required", "Code is required");
         } else if (country.getId() != null
                 && repository.findOne(country.getId()) == null
                 && repository.findOne(QCountry.country.code.eq(country.getCode())) != null) {
-            errors.rejectValue("code", "code.exists");
+            errors.rejectValue("code", "exists", "Code is taken");
         }
 
         if (StringUtils.isEmpty(country.getName())) {
-            errors.rejectValue("name", "name.required");
+            errors.rejectValue("name", "required", "Name is required");
         }
     }
 }

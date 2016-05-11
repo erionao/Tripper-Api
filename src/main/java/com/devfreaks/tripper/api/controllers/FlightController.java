@@ -55,11 +55,9 @@ public class FlightController {
         Flight flight = service.findOne(id);
 
         flight.setArrival(model.getArrival());
-        flight.setBaggageLimit(model.getBaggageLimit());
         flight.setDeparture(model.getDeparture());
         flight.setFrom(model.getFrom());
         flight.setTo(model.getTo());
-        flight.setGate(model.getGate());
         flight.setStatus(model.getStatus());
         flight.setPrice(model.getPrice());
         flight.setCode(model.getCode());

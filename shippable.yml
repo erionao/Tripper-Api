@@ -5,7 +5,7 @@ jdk:
 
 after_success:
    - mvn clean
-   - mvn test
+   - mvn compile
 
 notifications:
   email:

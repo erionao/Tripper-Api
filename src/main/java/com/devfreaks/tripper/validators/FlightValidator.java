@@ -28,43 +28,31 @@ public class FlightValidator implements Validator {
         Flight flight = (Flight) o;
 
         if (StringUtils.isEmpty(flight.getCode())) {
-            errors.rejectValue("code", "required", "code.required");
+            errors.rejectValue("code", "required", "Code is required");
         }
 
-        if (airportRepo.findOne(flight.getFrom().getId()) != null) {
-            errors.rejectValue("from.id", "required", "from.id.required");
+        if (airportRepo.findOne(flight.getFrom().getId()) == null) {
+            errors.rejectValue("from.id", "required", "From is required");
         }
 
-        if (airportRepo.findOne(flight.getTo().getId()) != null) {
-            errors.rejectValue("to.id", "required", "to.id.required");
+        if (airportRepo.findOne(flight.getTo().getId()) == null) {
+            errors.rejectValue("to.id", "required", "To is required");
         }
 
-        if (flight.getDeparture() != null) {
-            errors.rejectValue("departure", "required", "departure.required");
+        if (flight.getDeparture() == null) {
+            errors.rejectValue("departure", "required", "Departure is required");
         }
 
-        if (flight.getArrival() != null) {
-            errors.rejectValue("arrival", "required", "arrival.required");
+        if (flight.getArrival() == null) {
+            errors.rejectValue("arrival", "required", "Arrival is required");
         }
 
-        if (flight.getPrice() != null) {
-            errors.rejectValue("price", "required", "price.required");
+        if (flight.getPrice() == null) {
+            errors.rejectValue("price", "required", "Price is required");
         }
 
-        if (flight.getBaggageLimit() != null) {
-            errors.rejectValue("baggageLimit", "required", "baggageLimit.required");
-        }
-
-        if ((flight.getStatus() != FlightStatus.CANCELED) || (flight.getStatus() != FlightStatus.READY) || (flight.getStatus() != FlightStatus.FULL)) {
-            errors.rejectValue("status", "invalid", "status.invalid");
-        }
-
-        if (flight.getGate() != null) {
-            errors.rejectValue("gate", "required", "gate.required");
-        }
-
-        if (flight.getBaggageLimit() != null) {
-            errors.rejectValue("baggageLimit", "required", "baggageLimit.required");
+        if (flight.getStatus() == null) {
+            errors.rejectValue("status", "required", "Status is required");
         }
     }
 }

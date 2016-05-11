@@ -29,17 +29,17 @@ public class AirportValidator implements Validator {
         Airport airport = (Airport) target;
 
         if (StringUtils.isEmpty(airport.getCode())) {
-            errors.rejectValue("code", "code.required");
+            errors.rejectValue("code", "required", "Code is required");
         } else if (repository.findOne(QAirport.airport.code.eq(airport.getCode())) != null) {
-            errors.rejectValue("code", "code.exists");
+            errors.rejectValue("code", "exists", "Code is taken");
         }
 
         if (StringUtils.isEmpty(airport.getName())) {
-            errors.rejectValue("name", "name.required");
+            errors.rejectValue("name", "required", "Name is required");
         }
 
         if (countryRepository.findOne(airport.getCountry().getId()) != null) {
-            errors.rejectValue("country.id", "country.id.required");
+            errors.rejectValue("country.id", "required", "Country required");
         }
 
 
