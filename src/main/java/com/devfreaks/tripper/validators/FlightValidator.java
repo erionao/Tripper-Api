@@ -2,7 +2,6 @@ package com.devfreaks.tripper.validators;
 
 import com.devfreaks.tripper.entities.Flight;
 import com.devfreaks.tripper.entities.enums.FlightStatus;
-import com.devfreaks.tripper.repositories.AirplaneRepository;
 import com.devfreaks.tripper.repositories.AirportRepository;
 import com.devfreaks.tripper.repositories.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class FlightValidator implements Validator {
 
     @Autowired
     private AirportRepository airportRepo;
-
-    @Autowired
-    private AirplaneRepository airplaneRepo;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -67,16 +63,8 @@ public class FlightValidator implements Validator {
             errors.rejectValue("gate", "required", "gate.required");
         }
 
-
         if (flight.getBaggageLimit() != null) {
             errors.rejectValue("baggageLimit", "required", "baggageLimit.required");
         }
-
-        if (airplaneRepo.findOne(flight.getAirplane().getId()) != null) {
-            errors.rejectValue("airplane", "required", "flight.airplane.required");
-        }
-
     }
-
-
 }

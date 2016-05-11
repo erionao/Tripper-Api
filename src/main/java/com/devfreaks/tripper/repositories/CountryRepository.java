@@ -2,14 +2,11 @@ package com.devfreaks.tripper.repositories;
 
 import com.devfreaks.tripper.entities.Country;
 import com.devfreaks.tripper.entities.QCountry;
-import com.devfreaks.tripper.entities.QUser;
-import com.devfreaks.tripper.entities.User;
 import com.mysema.query.types.path.StringPath;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.querydsl.binding.SingleValueBinding;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

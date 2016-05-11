@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class TicketFlightServiceImpl implements TicketFlightService{
+public class TicketFlightServiceImpl implements TicketFlightService {
 
     @Autowired
     private TicketFlightRepository repository;
@@ -27,16 +27,14 @@ public class TicketFlightServiceImpl implements TicketFlightService{
     }
 
     @Override
-    public TicketFlight save(TicketFlight ticketFlight){
+    public TicketFlight save(TicketFlight ticketFlight) {
         return repository.save(ticketFlight);
     }
 
     @Override
-    public void delete(TicketFlight ticketFlight){
+    public void delete(TicketFlight ticketFlight) {
         repository.delete(ticketFlight);
     }
-
-
 
 
 }

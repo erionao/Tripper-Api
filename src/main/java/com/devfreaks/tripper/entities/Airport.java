@@ -4,14 +4,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity(name = "air_airport")
 public class Airport {
 
     @Id
-    @GeneratedValue(generator="uuid")
+    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "pg-uuid")
     private UUID id;

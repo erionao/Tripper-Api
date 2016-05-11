@@ -38,7 +38,7 @@ public class TicketValidator implements Validator {
             errors.rejectValue("fullName", "fullName.required");
         }
 
-        if(ticket.getBirthday() != null){
+        if (ticket.getBirthday() != null) {
             errors.rejectValue("birthday", "birthday.required");
         }
 
@@ -46,7 +46,7 @@ public class TicketValidator implements Validator {
             errors.rejectValue("passportNo", "passportNo.required");
         }
 
-        if(userRepository.findOne(ticket.getUser().getId()) != null){
+        if (userRepository.findOne(ticket.getUser().getId()) != null) {
             errors.rejectValue("user.id", "user.id.required");
         }
 

@@ -1,7 +1,6 @@
 package com.devfreaks.tripper.api.controllers;
 
 import com.devfreaks.tripper.entities.Country;
-import com.devfreaks.tripper.entities.User;
 import com.devfreaks.tripper.exceptions.TripperValidationException;
 import com.devfreaks.tripper.services.CountryService;
 import com.devfreaks.tripper.validators.CountryValidator;

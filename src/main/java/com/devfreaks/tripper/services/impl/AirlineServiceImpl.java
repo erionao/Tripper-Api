@@ -1,7 +1,6 @@
 package com.devfreaks.tripper.services.impl;
 
 import com.devfreaks.tripper.entities.Airline;
-import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.repositories.AirlineRepository;
 import com.devfreaks.tripper.services.AirlineService;

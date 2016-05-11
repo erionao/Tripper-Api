@@ -1,6 +1,7 @@
 package com.devfreaks.tripper.repositories;
 
-import com.devfreaks.tripper.entities.*;
+import com.devfreaks.tripper.entities.QTicket;
+import com.devfreaks.tripper.entities.Ticket;
 import com.mysema.query.types.path.StringPath;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;

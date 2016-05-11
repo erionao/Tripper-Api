@@ -9,8 +9,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.util.HashMap;
-
 @Component
 public class UserValidator implements Validator {
 
@@ -24,7 +22,7 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        User user = (User)o;
+        User user = (User) o;
 
         if (StringUtils.isEmpty(user.getFullName())) {
             errors.rejectValue("fullName", "required", "Full name is required");

@@ -2,7 +2,6 @@ package com.devfreaks.tripper.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ import java.util.UUID;
 public class Airline {
 
     @Id
-    @GeneratedValue(generator="uuid")
+    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "pg-uuid")
     private UUID id;

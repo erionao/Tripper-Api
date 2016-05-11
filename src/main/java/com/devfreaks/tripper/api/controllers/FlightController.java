@@ -5,8 +5,8 @@ import com.devfreaks.tripper.exceptions.TripperNotFoundException;
 import com.devfreaks.tripper.exceptions.TripperValidationException;
 import com.devfreaks.tripper.services.FlightService;
 import com.devfreaks.tripper.validators.FlightValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.mysema.query.types.Predicate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -54,7 +54,6 @@ public class FlightController {
     public Flight update(@RequestBody @Validated Flight model, @PathVariable UUID id, BindingResult result) {
         Flight flight = service.findOne(id);
 
-        flight.setAirplane(model.getAirplane());
         flight.setArrival(model.getArrival());
         flight.setBaggageLimit(model.getBaggageLimit());
         flight.setDeparture(model.getDeparture());

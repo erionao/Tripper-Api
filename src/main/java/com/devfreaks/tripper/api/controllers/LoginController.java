@@ -28,7 +28,7 @@ public class LoginController {
         }
 
         User user = service.findByLogin(model.login);
-        if (!new BCryptPasswordEncoder().matches(model.password, user.getPassword()) || !user.getActive())   {
+        if (!new BCryptPasswordEncoder().matches(model.password, user.getPassword()) || !user.getActive()) {
             throw new TripperUnauthorizedException("Wrong user/password combination.");
         }
 

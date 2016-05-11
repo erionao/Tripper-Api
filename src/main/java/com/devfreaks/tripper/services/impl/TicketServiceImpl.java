@@ -1,12 +1,8 @@
 package com.devfreaks.tripper.services.impl;
 
-import com.devfreaks.tripper.entities.Country;
 import com.devfreaks.tripper.entities.Ticket;
-import com.devfreaks.tripper.exceptions.TripperException;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
-import com.devfreaks.tripper.repositories.CountryRepository;
 import com.devfreaks.tripper.repositories.TicketRepository;
-import com.devfreaks.tripper.services.CountryService;
 import com.devfreaks.tripper.services.TicketService;
 import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;

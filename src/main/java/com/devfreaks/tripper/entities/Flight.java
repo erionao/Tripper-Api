@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Flight {
 
     @Id
-    @GeneratedValue(generator="uuid")
+    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "pg-uuid")
     private UUID id;
@@ -47,10 +47,6 @@ public class Flight {
 
     @Column(nullable = false)
     private String gate;
-
-    @ManyToOne
-    @JoinColumn(name = "airplane_id", nullable = false)
-    private Airplane airplane;
 
     public UUID getId() {
         return id;
@@ -130,13 +126,5 @@ public class Flight {
 
     public void setGate(String gate) {
         this.gate = gate;
-    }
-
-    public Airplane getAirplane() {
-        return airplane;
-    }
-
-    public void setAirplane(Airplane airplane) {
-        this.airplane = airplane;
     }
 }

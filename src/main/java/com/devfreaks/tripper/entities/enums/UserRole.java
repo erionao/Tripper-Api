@@ -1,6 +1,6 @@
 package com.devfreaks.tripper.entities.enums;
 
-public enum  UserRole {
+public enum UserRole {
 
     ADMINISTRATOR,
     CLIENT

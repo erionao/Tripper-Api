@@ -1,9 +1,7 @@
 package com.devfreaks.tripper.validators;
 
 import com.devfreaks.tripper.entities.Airport;
-import com.devfreaks.tripper.entities.Country;
 import com.devfreaks.tripper.entities.QAirport;
-import com.devfreaks.tripper.entities.QCountry;
 import com.devfreaks.tripper.repositories.AirportRepository;
 import com.devfreaks.tripper.repositories.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ public class AirportValidator implements Validator {
             errors.rejectValue("name", "name.required");
         }
 
-        if(countryRepository.findOne(airport.getCountry().getId())!= null){
+        if (countryRepository.findOne(airport.getCountry().getId()) != null) {
             errors.rejectValue("country.id", "country.id.required");
         }
 
