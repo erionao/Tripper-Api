@@ -19,7 +19,6 @@ public class Airline {
     @Type(type = "pg-uuid")
     private UUID id;
 
-    @NotEmpty
     @Column(name = "name", nullable = false)
     private String name;
 

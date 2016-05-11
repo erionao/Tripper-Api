@@ -1,13 +1,9 @@
 package com.devfreaks.tripper.api.controllers;
 
 import com.devfreaks.tripper.entities.Airline;
-import com.devfreaks.tripper.entities.Country;
-import com.devfreaks.tripper.entities.User;
 import com.devfreaks.tripper.exceptions.TripperValidationException;
 import com.devfreaks.tripper.services.AirlineService;
-import com.devfreaks.tripper.services.CountryService;
 import com.devfreaks.tripper.validators.AirlineValidator;
-import com.devfreaks.tripper.validators.CountryValidator;
 import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -33,6 +28,7 @@ public class AirlinesController {
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Airline> index(@QuerydslPredicate(root = Airline.class) Predicate predicate, Pageable pageable, @RequestParam("sortOrder") String sortOrder, @RequestParam("sort") String sort) {
         pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), Sort.Direction.valueOf(sortOrder.toUpperCase()), sort);
+
         return service.findAll(predicate, pageable);
     }
 
@@ -42,7 +38,7 @@ public class AirlinesController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Airline save(@RequestBody @Validated Airline airline, BindingResult result) {
+    public Airline save(@RequestBody Airline airline, BindingResult result) {
         validator.validate(airline, result);
 
         if (result.hasErrors()) {
@@ -53,7 +49,7 @@ public class AirlinesController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Airline update(@RequestBody @Validated Airline model, @PathVariable UUID id, BindingResult result) {
+    public Airline update(@RequestBody Airline model, @PathVariable UUID id, BindingResult result) {
         Airline airline = service.findOne(id);
         airline.setName(model.getName());
 

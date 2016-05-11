@@ -48,7 +48,6 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
             statusCode = HttpStatus.valueOf(Integer.valueOf(result.get("status").toString()));
         }
 
-
         return new ResponseEntity<>(result, statusCode) ;
     }
 

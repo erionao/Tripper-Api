@@ -26,7 +26,9 @@ public class CountryValidator implements Validator {
 
         if (StringUtils.isEmpty(country.getCode())) {
             errors.rejectValue("code", "code.required");
-        } else if (repository.findOne(QCountry.country.code.eq(country.getCode())) != null) {
+        } else if (country.getId() != null
+                && repository.findOne(country.getId()) == null
+                && repository.findOne(QCountry.country.code.eq(country.getCode())) != null) {
             errors.rejectValue("code", "code.exists");
         }
 
