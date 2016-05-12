@@ -30,8 +30,6 @@ public class AirportValidator implements Validator {
 
         if (StringUtils.isEmpty(airport.getCode())) {
             errors.rejectValue("code", "required", "Code is required");
-        } else if (repository.findOne(QAirport.airport.code.eq(airport.getCode())) != null) {
-            errors.rejectValue("code", "exists", "Code is taken");
         }
 
         if (StringUtils.isEmpty(airport.getName())) {

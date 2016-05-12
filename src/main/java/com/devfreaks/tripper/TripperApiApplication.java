@@ -1,6 +1,7 @@
 package com.devfreaks.tripper;
 
 import com.devfreaks.tripper.api.filters.JwtFilter;
+import com.devfreaks.tripper.dump.DataDump;
 import com.devfreaks.tripper.entities.Airport;
 import com.devfreaks.tripper.entities.Country;
 import com.devfreaks.tripper.entities.QCountry;
@@ -16,6 +17,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ResourceLoader;
 
 @SpringBootApplication
 public class TripperApiApplication extends SpringBootServletInitializer {
@@ -30,34 +32,13 @@ public class TripperApiApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    CommandLineRunner init(final UserService userService, final CountryService countryService, final AirportService airportService) {
+    CommandLineRunner init(final ResourceLoader resourceLoader, final UserService userService, final CountryService countryService, final AirportService airportService) {
 
         return new CommandLineRunner() {
 
             @Override
             public void run(String... arg0) throws Exception {
-                User user = new User();
-                user.setFullName("John Doe");
-                user.setActive(true);
-                user.setLogin("john@doe.com");
-                user.setPassword("johny");
-                user.setRole(UserRole.ADMINISTRATOR);
-
-                userService.save(user);
-
-                /**
-                 * Kosovo
-                 */
-                Country country = null;
-
-                if (countryService.findOne(QCountry.country.name.eq("Kosovo")) == null) {
-                    country = countryService.save(new Country("Kosovo"));
-                } else {
-                    country = countryService.findOne(QCountry.country.name.eq("Kosovo"));
-                }
-
-                countryService.save(new Country("Kosovo"));
-                airportService.save(new Airport("PRN", "Pristina International Airport Adem Jashari", country));
+                DataDump.seed(resourceLoader, userService, countryService, airportService);
             }
 
         };

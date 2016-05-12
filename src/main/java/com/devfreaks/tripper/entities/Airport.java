@@ -15,7 +15,7 @@ public class Airport {
     @Type(type = "pg-uuid")
     private UUID id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String code;
 
     @Column(nullable = false)
