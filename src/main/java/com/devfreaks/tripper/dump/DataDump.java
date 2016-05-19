@@ -33,6 +33,7 @@ public class DataDump {
          */
         Country country = null;
 
+        /*
         try {
 
             Resource resource = resourceLoader.getResource("classpath:airports.csv");
@@ -63,7 +64,7 @@ public class DataDump {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
         System.out.println("Done");
     }
 

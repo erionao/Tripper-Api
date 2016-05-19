@@ -43,7 +43,7 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
         Throwable error = this.errorAttributes.getError(requestAttributes);
         ResponseStatus annotation = null;
         if (error != null) {
-            AnnotationUtils.getAnnotation(error.getClass(), ResponseStatus.class);
+            annotation = AnnotationUtils.getAnnotation(error.getClass(), ResponseStatus.class);
         }
 
         HttpStatus statusCode = annotation != null ? annotation.value() : INTERNAL_SERVER_ERROR;
