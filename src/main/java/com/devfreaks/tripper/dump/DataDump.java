@@ -28,9 +28,6 @@ public class DataDump {
 
         userService.save(user);
 
-        /**
-         * Kosovo
-         */
         Country country = null;
 
         try {
@@ -38,8 +35,8 @@ public class DataDump {
             Resource resource = resourceLoader.getResource("classpath:airports.csv");
             String csvFile = resource.getFile().getAbsolutePath();
 
-            BufferedReader br = null;
-            String line = "";
+            BufferedReader br;
+            String line;
             String cvsSplitBy = ",";
 
             br = new BufferedReader(new FileReader(csvFile));

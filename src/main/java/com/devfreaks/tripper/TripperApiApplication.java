@@ -38,7 +38,7 @@ public class TripperApiApplication extends SpringBootServletInitializer {
 
             @Override
             public void run(String... arg0) throws Exception {
-                DataDump.seed(resourceLoader, userService, countryService, airportService);
+                //DataDump.seed(resourceLoader, userService, countryService, airportService);
             }
 
         };
