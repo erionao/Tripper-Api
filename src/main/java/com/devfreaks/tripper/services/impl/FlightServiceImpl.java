@@ -3,6 +3,7 @@ package com.devfreaks.tripper.services.impl;
 
 import com.devfreaks.tripper.entities.Flight;
 import com.devfreaks.tripper.exceptions.TripperNotFoundException;
+import com.devfreaks.tripper.repositories.AirportRepository;
 import com.devfreaks.tripper.repositories.FlightRepository;
 import com.devfreaks.tripper.services.FlightService;
 import com.mysema.query.types.Predicate;

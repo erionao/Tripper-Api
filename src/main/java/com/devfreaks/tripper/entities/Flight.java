@@ -20,11 +20,11 @@ public class Flight {
     @Column(nullable = false, unique = true)
     private String code;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "from_airport", nullable = false)
     private Airport from;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "to_airport", nullable = false)
     private Airport to;
 
