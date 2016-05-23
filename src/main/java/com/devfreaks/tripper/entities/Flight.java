@@ -1,8 +1,10 @@
 package com.devfreaks.tripper.entities;
 
 import com.devfreaks.tripper.entities.enums.FlightStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,10 +31,12 @@ public class Flight {
     private Airport to;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(nullable = false)
     private Date departure;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(nullable = false)
     private Date arrival;
 

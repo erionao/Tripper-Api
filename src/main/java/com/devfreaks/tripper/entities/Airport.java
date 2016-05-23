@@ -21,7 +21,7 @@ public class Airport {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
