@@ -23,17 +23,22 @@ public class JwtFilter extends GenericFilterBean {
         final HttpServletRequest request = (HttpServletRequest) req;
         final String authHeader = request.getHeader("Authorization");
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (
+                (!request.getRequestURI().startsWith("/api/airports") && !request.getRequestURI().startsWith("/api/search"))
+                        && (authHeader == null || !authHeader.startsWith("Bearer "))
+                ) {
             throw new TripperUnauthorizedException("Missing or invalid Authorization header.");
         }
 
-        final String token = authHeader.substring(7); // The part after "Bearer "
+        if (!request.getRequestURI().startsWith("/api/search") && !request.getRequestURI().startsWith("/api/airports")) {
+            final String token = authHeader.substring(7); // The part after "Bearer "
 
-        try {
-            final Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).getBody();
-            request.setAttribute("claims", claims);
-        } catch (final SignatureException e) {
-            throw new TripperUnauthorizedException("Invalid token.");
+            try {
+                final Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).getBody();
+                request.setAttribute("claims", claims);
+            } catch (final SignatureException e) {
+                throw new TripperUnauthorizedException("Invalid token.");
+            }
         }
 
         chain.doFilter(req, res);
